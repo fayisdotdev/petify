@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Petify</title>
+    <script>
+      // GitHub Pages has no server-side routing, so a direct visit to e.g.
+      // /petify/cart 404s at the server before React Router ever loads. This
+      // page catches that 404, stashes the intended path, and redirects to
+      // the app root — main.jsx below restores the real URL on load so
+      // React Router can take over. Standard workaround for SPAs on Pages.
+      sessionStorage.setItem('petify-redirect-path', location.pathname + location.search + location.hash)
+      location.replace('/petify/')
+    </script>
+  </head>
+  <body></body>
+</html>

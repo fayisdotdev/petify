@@ -14,7 +14,7 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/petify/">
       <nav>
         <Link to="/">Home</Link> | <Link to="/catalog">Catalog</Link> |{' '}
         <Link to="/cart">Cart</Link> | <Link to="/login">Log in</Link> |{' '}
