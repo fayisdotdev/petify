@@ -58,11 +58,21 @@ Outputs static files to `dist/`.
 
 ## Deploy (GitHub Pages)
 
-1. Push the repo to GitHub.
-2. Configure the repo's Pages settings to deploy from the `dist/` output (via GitHub Actions,
-   or the `gh-pages` branch approach — exact steps to be finalized in Phase 0 of `TASKS.md`).
-3. Once a custom domain is purchased, add it in the repo's Pages settings and update DNS
-   records with your domain registrar.
+Deployment is automated via `.github/workflows/deploy.yml` — it builds and deploys on every
+push to `main`. One-time setup, done once per repo:
+
+1. In the GitHub repo, go to **Settings → Pages**, and under "Build and deployment / Source",
+   select **GitHub Actions** (not "Deploy from a branch").
+2. In **Settings → Secrets and variables → Actions**, add two repository secrets:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+
+   (Same values as your local `.env` — the anon key is safe here; see the note above.)
+3. Push to `main`. Check the **Actions** tab to watch the build/deploy run. Once it succeeds,
+   the site is live at `https://<your-github-username>.github.io/petify/`.
+4. Once a custom domain is purchased, add it in **Settings → Pages → Custom domain**, update
+   DNS records with your domain registrar, and change `base: '/petify/'` back to `base: '/'`
+   in `vite.config.js` (see the comment there).
 
 ## Database setup (Supabase)
 

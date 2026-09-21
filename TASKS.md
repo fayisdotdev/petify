@@ -8,9 +8,9 @@ comes up — don't renumber, just append.
 
 - [x] Create GitHub repo `petify`, add PRD.md, ARCHITECTURE.md, CLAUDE.md, TASKS.md, README.md
 - [x] Scaffold Vite + React app (`npm create vite@latest`), confirm `npm run dev` works
-- [ ] Create Supabase project, note project URL + anon key (do not commit them)
-- [ ] Add `.env.example` with variable names only, add `.env` to `.gitignore`
-- [ ] Set up `src/lib/supabaseClient.js`
+- [x] Create Supabase project, note project URL + anon key (do not commit them)
+- [x] Add `.env.example` with variable names only, add `.env` to `.gitignore`
+- [x] Set up `src/lib/supabaseClient.js`
 - [x] Set up basic routing shell in `App.jsx` with placeholder pages (Home, Catalog, Cart,
       Login, Signup, Admin)
 - [ ] Confirm a basic build deploys successfully to GitHub Pages (even just "Hello Petify")

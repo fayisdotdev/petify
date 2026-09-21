@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+# Builds the Vite app and deploys the static output to GitHub Pages
+# whenever main is updated. See README.md for the one-time repo setting
+# that needs to be enabled for this to work (Pages source = GitHub Actions).
+
+on:
+  push:
+    branches: [main]
+  # Lets you trigger a redeploy manually from the Actions tab without a new push.
+  workflow_dispatch:
+
+# Only one deployment should run at a time.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Injected as GitHub Actions secrets (Settings > Secrets and
+          # variables > Actions) — never committed. The anon key is safe to
+          # expose in the built output as long as RLS is correctly set up;
+          # see README.md.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
