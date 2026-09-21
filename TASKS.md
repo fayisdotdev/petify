@@ -13,7 +13,7 @@ comes up — don't renumber, just append.
 - [x] Set up `src/lib/supabaseClient.js`
 - [x] Set up basic routing shell in `App.jsx` with placeholder pages (Home, Catalog, Cart,
       Login, Signup, Admin)
-- [ ] Confirm a basic build deploys successfully to GitHub Pages (even just "Hello Petify")
+- [x] Confirm a basic build deploys successfully to GitHub Pages (even just "Hello Petify")
 
 ## Phase 1 — Database schema
 
